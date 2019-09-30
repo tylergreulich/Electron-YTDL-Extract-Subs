@@ -1,0 +1,12 @@
+type Query {
+  hello: String
+}
+
+type Mutation {
+  downloadFile(
+    videoId: String!
+    videoTitle: String!
+    channelTitle: String!
+    fileFormat: String!
+  ): Boolean
+}
