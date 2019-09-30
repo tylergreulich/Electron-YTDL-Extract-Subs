@@ -47,12 +47,18 @@ export const SearchResults: React.FC<ISearchResultProps> = ({
             <React.Fragment key={id.videoId}>
               <YouTube videoId={id.videoId} opts={opts} />
               <button
-                onClick={async () =>
-                  onDownloadFileHandler({
+                onClick={async () => {
+                  setIsLoading(true)
+
+                  const { loading } = await onDownloadFileHandler({
                     ...payload,
                     fileFormat: 'mp3'
                   })
-                }
+
+                  if (!loading) {
+                    setIsLoading(false)
+                  }
+                }}
               >
                 Download MP3
               </button>
