@@ -3,6 +3,7 @@ const isDev = require('electron-is-dev')
 const electronOauth2 = require('electron-oauth2')
 const path = require('path')
 require('electron-reload')(__dirname)
+const fs = require('fs')
 
 const myApp = electron.app
 const BrowserWindow = electron.BrowserWindow
@@ -15,8 +16,8 @@ const windowParams = {
   alwaysOnTop: true,
   autoHideMenuBar: true,
   webPreferences: {
-    nodeIntegration: false,
-    webIntegration: false
+    nodeIntegration: true,
+    webIntegration: true
   }
 }
 

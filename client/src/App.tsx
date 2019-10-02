@@ -18,14 +18,18 @@ const App = () => {
   const [langToSearch, setLangToSearch] = React.useState('')
 
   const fetchData = async (input: string) => {
-    const data: SearchResponse = await axios.get(
-      `https://www.googleapis.com/youtube/v3/search?maxResults=${25}&part=snippet&q=${input}&key=${
-        config.apiKey
-      }&type=video&videoEmbeddable=true
-`
-    )
+    try {
+      const data: SearchResponse = await axios.get(
+        `https://www.googleapis.com/youtube/v3/search?maxResults=${25}&part=snippet&q=${input}&key=${
+          config.apiKey
+        }&type=video&videoEmbeddable=true
+        `
+      )
 
-    setSearchResults(data)
+      setSearchResults(data)
+    } catch (error) {
+      console.error(error)
+    }
   }
 
   const defaultLangOpt = languages[0]

@@ -1,11 +1,8 @@
-import { useMutation } from '@apollo/react-hooks'
 import React from 'react'
 import YouTube from 'react-youtube'
-import { DOWNLOAD_FILE_MUTATION } from '../../graphql/mutations/DownloadFile.mutation'
-import {
-  DownloadFileVariables,
-  ISearchResultProps
-} from './SearchResults.interface'
+import { ISearchResultProps } from './SearchResults.interface'
+const electron = window.require('electron')
+const fs = electron.remote.require('fs')
 
 export const SearchResults: React.FC<ISearchResultProps> = ({
   searchResults
@@ -22,62 +19,20 @@ export const SearchResults: React.FC<ISearchResultProps> = ({
 
   const { data } = searchResults
 
-  const onDownloadFileHandler = async (payload: DownloadFileVariables) => {
-    const [{}, { loading }] = useMutation<{}, DownloadFileVariables>(
-      DOWNLOAD_FILE_MUTATION,
-      {
-        variables: payload
-      }
-    )
-
-    return { loading }
+  const testFn = () => {
+    return fs.writeFileSync(__dirname, 'random string.txt')
   }
 
   return (
     <section>
       {data &&
         data.items.map(({ snippet, id }) => {
-          const payload = {
-            videoId: id.videoId,
-            videoTitle: snippet.title,
-            channelTitle: snippet.channelTitle
-          }
-
           return (
             <React.Fragment key={id.videoId}>
               <YouTube videoId={id.videoId} opts={opts} />
-              <button
-                onClick={async () => {
-                  setIsLoading(true)
-
-                  const { loading } = await onDownloadFileHandler({
-                    ...payload,
-                    fileFormat: 'mp3'
-                  })
-
-                  if (!loading) {
-                    setIsLoading(false)
-                  }
-                }}
-              >
-                Download MP3
-              </button>
-              <button
-                onClick={async () => {
-                  setIsLoading(true)
-
-                  const { loading } = await onDownloadFileHandler({
-                    ...payload,
-                    fileFormat: 'mp4'
-                  })
-
-                  if (!loading) {
-                    setIsLoading(false)
-                  }
-                }}
-              >
-                Download MP4
-              </button>
+              <button>Download MP3</button>
+              <button>Download MP4</button>
+              <button onClick={() => testFn()}>Test Button</button>
             </React.Fragment>
           )
         })}
