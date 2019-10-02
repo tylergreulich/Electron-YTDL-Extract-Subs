@@ -59,11 +59,16 @@
     ]
   },
   "devDependencies": {
+    "@rescripts/cli": "^0.0.12",
+    "@rescripts/rescript-env": "^0.0.10",
     "@types/react-router-dom": "^4.3.5",
     "@types/react-youtube": "^7.6.2",
     "concurrently": "^4.1.2",
     "electron": "^6.0.9",
     "electron-builder": "^21.2.0",
     "wait-on": "^3.3.0"
-  }
+  },
+  "rescripts": [
+    "env"
+  ]
 }
