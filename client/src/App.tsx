@@ -1,11 +1,9 @@
-import axios from 'axios'
-import React from 'react'
-import Dropdown from 'react-dropdown'
-import './App.css'
-import { SearchResults } from './components/SearchResults/SearchResults'
-import { SearchResponse } from './components/SearchResults/SearchResults.interface'
-import { config } from './config'
-import { languages } from './listOfLanguages'
+import axios from 'axios';
+import React from 'react';
+import './App.css';
+import { SearchResults } from './components/SearchResults/SearchResults';
+import { SearchResponse } from './components/SearchResults/SearchResults.interface';
+import { config } from './config';
 
 const App = () => {
   const [inputValue, setInputValue] = React.useState<string>('')
@@ -14,8 +12,6 @@ const App = () => {
     searchResults,
     setSearchResults
   ] = React.useState<SearchResponse | null>(null)
-
-  const [langToSearch, setLangToSearch] = React.useState('')
 
   const fetchData = async (input: string) => {
     try {
@@ -32,11 +28,8 @@ const App = () => {
     }
   }
 
-  const defaultLangOpt = languages[0]
-
   return (
     <div>
-      <Dropdown options={languages} value={defaultLangOpt} />
       <p>Hello, this is some random text!</p>
       <form
         onSubmit={async event => {
