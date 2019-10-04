@@ -4,16 +4,11 @@ This is an Electron app using React to download the subtitles, audio / audio and
 
 ## Getting Started
 
-Create a file called `config.ts` in client/src and add the API key
+Create a file called `config.ts` in client/src and add the API key, then run
 
 ```
 yarn install
-```
-
-In both the client and server directory, then
-
-```
 yarn start
 ```
 
-In both directories
+In the client directory
